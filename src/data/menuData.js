@@ -4,15 +4,7 @@ export let menus = [
         href : "/"
     },
     {
-        name : "About",
-        href : "/about"
-    },
-    {
-        name : "Portfolio",
-        href : "/portfolio"
-    },
-    {
-        name : "contact",
-        href : "/contact"
+        name : "Projects",
+        href : "/projects"
     }
 ]

@@ -1,100 +1,64 @@
-// import { GithubIcon } from "lucide-react"
-// import { ExternalLinkIcon } from "lucide-react"
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import { Github, ExternalLink } from 'lucide-react';
 
-// const ProjectBox = ({key, item}) => {
-//   return (
-//     <div key={key} className = "m-5 md:m-9 border border-gray-400 rounded-2xl overflow-hidden max-w-68 md:max-w-80 lg:max-w-96">
-//         <div className="relative">
-//             <img src={item.image} className = "w-68 md:w-80 lg:w-96 "/>
-//             <div className = " p-1 md:p-2 pt-2 md:pt-4 absolute left-0 bottom-0 flex gap-3 md:gap-5 bg-gradient-to-t from-gray-800 to-transparent">
-//                 <a href = {item.github} className = "h-4 md:h-8">
-//                     {<GithubIcon className = "w-5 md:w-7 lg:w-9" />}
-//                 </a>
-//                 {(item.livelink) ? (
-//                     <a href = {item.livelink} className = "h-4 md:h-8">
-//                         {<ExternalLinkIcon className = "w-5 md:w-7 lg:w-9" />}
-//                     </a>
-//                 ) : (
-//                     <div className = "h-4 md:h-8 opacity-50">
-//                         {<ExternalLinkIcon className = "w-5 md:w-7 lg:w-9" />}
-//                     </div>
-//                 )}
-//             </div>
-//         </div> 
-//         <div className="p-4 md:p-5 lg:p-6 flex flex-col gap-3 md:gap-5">
-//             <div className="text-xl md:text-2xl">
-//                 {item.name}
-//             </div>
-//             <div className="text-gray-400 text-sm md:text-[1rem]">
-//                 {item.desc}
-//             </div>
-//             <div className = "flex flex-wrap">
-//                 {item.tags.map((item, index) => (
-//                     <div key={index} className="text-sm md:text-[1rem] py-1 px-1 md:px-2 m-1 md:m-2 bg-gray-800 text-gray-300 rounded-full">{item}</div>
-//                 ))}
-//             </div>
-//         </div>
-//     </div>
-//   )
-// }
+const ProjectBox = ({ project }) => {
+  const { isDark } = useContext(ThemeContext);
 
-// export default ProjectBox
-
-
-
-import { GithubIcon } from "lucide-react"
-import { ExternalLinkIcon } from "lucide-react"
-
-const ProjectBox = ({key, item}) => {
   return (
-    <div key={key} className="m-5 md:m-9 border border-slate-700/50 rounded-2xl overflow-hidden max-w-68 md:max-w-80 lg:max-w-96 bg-slate-800/30 backdrop-blur-sm hover:bg-slate-800/50 hover:border-slate-600/70 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-slate-900/50">
-        <div className="relative group">
-            <img src={item.image} className="w-68 md:w-80 lg:w-96 transition-transform duration-300 group-hover:scale-110"/>
-            <div className="p-2 md:p-3 pt-3 md:pt-5 absolute left-0 bottom-0 flex gap-4 md:gap-6 bg-gradient-to-t from-transparent via-gray-800 to-transparent">
-                <a 
-                    href={item.github} 
-                    className="h-5 md:h-8 text-gray-300 hover:text-white transition-all duration-300 transform hover:scale-110"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <GithubIcon className="w-6 md:w-8 lg:w-10 drop-shadow-lg" />
-                </a>
-                {(item.livelink) ? (
-                    <a 
-                        href={item.livelink} 
-                        className="h-5 md:h-8 text-white hover:text-white transition-all duration-300 transform hover:scale-110"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <ExternalLinkIcon className="w-6 md:w-8 lg:w-10 drop-shadow-lg" />
-                    </a>
-                ) : (
-                    <div className="h-5 md:h-8 opacity-50">
-                        <ExternalLinkIcon className="w-6 md:w-8 lg:w-10 text-gray-300" />
-                    </div>
-                )}
-            </div>
-        </div> 
-        <div className="p-5 md:p-6 lg:p-7 flex flex-col gap-4 md:gap-6">
-            <div className="text-xl md:text-2xl font-semibold text-gray-100">
-                {item.name}
-            </div>
-            <div className="text-gray-300 text-sm md:text-base leading-relaxed">
-                {item.desc}
-            </div>
-            <div className="flex flex-wrap gap-2 md:gap-3">
-                {item.tags.map((tag, index) => (
-                    <div 
-                        key={index} 
-                        className="text-sm md:text-base py-2 px-3 md:px-4 bg-slate-700/80 hover:bg-slate-600/80 text-gray-200 hover:text-white rounded-full border border-slate-600/50 hover:border-slate-500/70 transition-all duration-300 transform hover:scale-105"
-                    >
-                        {tag}
-                    </div>
-                ))}
-            </div>
-        </div>
-    </div>
-  )
-}
+    <div className={`w-full transition-all duration-300 group`}>
+      <div className={`h-full p-6 md:p-8 rounded-xl transition-all duration-300 flex flex-col md:flex-row md:items-center md:gap-8 ${isDark ? 'bg-slate-800/60 border border-slate-700/60 hover:border-rose-500/40 hover:shadow-lg hover:shadow-rose-500/15' : 'bg-white border border-gray-200 hover:border-rose-300 hover:shadow-lg hover:shadow-rose-400/15'}`}>
+        
+        {/* Project Header & Description */}
+        <div className="flex-1 mb-6 md:mb-0">
+          <h3 className={`text-2xl md:text-3xl font-bold mb-3 group-hover:text-rose-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            {project.name}
+          </h3>
+          <p className={`text-sm md:text-base leading-relaxed mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+            {project.desc}
+          </p>
 
-export default ProjectBox
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            {project.tags && project.tags.map((tag, index) => (
+              <span
+                key={index}
+                className={`px-3 py-1.5 text-xs md:text-sm rounded-md font-medium transition-colors ${isDark ? 'bg-slate-700/70 text-rose-300' : 'bg-rose-100/80 text-rose-700'}`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex gap-3 flex-wrap">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all ${isDark ? 'bg-slate-700 text-gray-300 hover:bg-slate-600 hover:text-white border border-slate-600' : 'bg-gray-200 text-gray-700 hover:bg-gray-300 border border-gray-300'}`}
+              >
+                <Github size={18} />
+                View Code
+              </a>
+            )}
+            {project.liveLink && (
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all text-white ${isDark ? 'bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 border border-rose-500/30' : 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 border border-rose-400/30'}`}
+              >
+                <ExternalLink size={18} />
+                Visit Live
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProjectBox;
